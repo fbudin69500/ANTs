@@ -15,8 +15,13 @@ namespace ants
 */
 template <class TComputeType, unsigned VImageDimension>
 typename itk::ImageBase<VImageDimension>::Pointer
+#if (_MSC_VER == 1800) || (_MSC_VER == 1900)
+RegistrationHelper<TComputeType, VImageDimension>::GetShrinkImageOutputInformation(const itk::ImageBase<VImageDimension> * inputImageInformation,
+                                typename const RegistrationHelper<TComputeType, VImageDimension>::ShrinkFactorsPerDimensionContainerType &shrinkFactorsPerDimensionForCurrentLevel) const
+#else
 RegistrationHelper<TComputeType, VImageDimension>::GetShrinkImageOutputInformation(const itk::ImageBase<VImageDimension> * inputImageInformation,
                                 const RegistrationHelper<TComputeType, VImageDimension>::ShrinkFactorsPerDimensionContainerType &shrinkFactorsPerDimensionForCurrentLevel) const
+#endif
 {
   typedef itk::Image<unsigned char, VImageDimension> DummyImageType;
 
