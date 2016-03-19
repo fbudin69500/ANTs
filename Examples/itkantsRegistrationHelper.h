@@ -795,9 +795,13 @@ protected:
   virtual ~RegistrationHelper();
 private:
 
+  #if (_MSC_VER == 1800) || (_MSC_VER == 1900)
+  typename itk::ImageBase<VImageDimension>::Pointer GetShrinkImageOutputInformation(const itk::ImageBase<VImageDimension> * inputImageInformation,
+                                typename const RegistrationHelper<TComputeType, VImageDimension>::ShrinkFactorsPerDimensionContainerType &shrinkFactorsPerDimensionForCurrentLevel) const;
+  #else
   typename itk::ImageBase<VImageDimension>::Pointer GetShrinkImageOutputInformation(const itk::ImageBase<VImageDimension> * inputImageInformation,
                                 const RegistrationHelper<TComputeType, VImageDimension>::ShrinkFactorsPerDimensionContainerType &shrinkFactorsPerDimensionForCurrentLevel) const;
-
+  #endif
   int ValidateParameters();
 
   std::ostream & Logger() const
